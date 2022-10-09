@@ -1,14 +1,15 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { selectCartItems, selectCartTotal } from '../../../redux/cart/cartSelector';
-import CheckoutItem from '../../CheckoutItem/CheckoutItem';
+import CheckoutItem from '../../components/CheckoutItem/CheckoutItem';
 import './Checkout.scss'
 
-const Checkout = () => {
-  const CartItems = useSelector(state => state);
-  const cartItems = selectCartItems(CartItems);
-  const cartTotal = useSelector(state => state);
-  const total = selectCartTotal(cartTotal);
+const CheckoutPage = () => {
+  const cartItems = useSelector(state => state.cart.cartItems);
+  const total = cartItems.reduce(
+    (accumalatedQuantity, cartItem) =>
+      accumalatedQuantity + cartItem.quantity * cartItem.price,
+    0
+  )
   return (
     <div className='checkout-page'>
       <div className="checkout-header">
@@ -34,4 +35,4 @@ const Checkout = () => {
   )
 }
 
-export default Checkout
+export default CheckoutPage

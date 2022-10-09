@@ -3,13 +3,15 @@ import Cart from "../../assests/shopping-bag.svg";
 import "./CartIcon.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { cartTogglerAction } from "../../redux/cart/cartActions";
-import {selectCartItemsCount } from "../../redux/cart/cartSelector";
-
-
 
 const CartIcon = () => {
-  const cartItems = useSelector(state => state);
-  const itemCount = selectCartItemsCount(cartItems)
+  const cartItems = useSelector(state => state.cart.cartItems);
+
+  const itemCount = cartItems.reduce(
+    (accumalatedQuantity, cartItem) =>
+      accumalatedQuantity + cartItem.quantity,
+    0
+  )
   const dispatch = useDispatch();
   return (
     <div className="cart-icon" onClick={() => dispatch(cartTogglerAction())}>

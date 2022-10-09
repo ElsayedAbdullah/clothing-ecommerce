@@ -1,6 +1,6 @@
 import React from "react";
 
-import { auth, createUserProfileDocument } from "../../firebase.utils";
+import { auth } from "../../utils/firebase/firebase.utils";
 import CustomButton from "../CustomButton/CustomButton";
 import FormInput from "../FormInput/FormInput";
 
@@ -28,20 +28,20 @@ class SignUp extends React.Component {
       return;
     }
 
-    try {
-      const { user } = await auth.createUserWithEmailAndPassword(email, password);
+    // try {
+    //   const { user } = await auth.createUserWithEmailAndPassword(email, password);
 
-      await createUserProfileDocument(user, { displayName });
+    //   await createUserProfileDocument(user, { displayName });
 
-      this.setState({
-        displayName: "",
-        email: "",
-        password: "",
-        confirmPassword: ""
-      });
-    } catch (error) {
-      console.error(error);
-    }
+    //   this.setState({
+    //     displayName: "",
+    //     email: "",
+    //     password: "",
+    //     confirmPassword: ""
+    //   });
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
   handleChange = e => {

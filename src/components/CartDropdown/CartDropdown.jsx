@@ -2,14 +2,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { cartTogglerAction } from "../../redux/cart/cartActions";
-import { selectCartItems } from "../../redux/cart/cartSelector";
 import CartItem from "../CartItem/CartItem";
 import CustomButton from "../CustomButton/CustomButton";
 import "./CartDropdown.scss";
 
 const CartDropdown = () => {
-  const CartItems = useSelector(state => state);
-  const cartItems = selectCartItems(CartItems);
+  const cartItems = useSelector(state => state.cart.cartItems);
   const navigate = useNavigate()
   const dispatch = useDispatch()
   return (
