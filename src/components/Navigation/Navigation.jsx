@@ -2,42 +2,44 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import "./Navigation.scss";
 import Logo from "../../assests/crown.svg";
-import { auth } from "../../utils/firebase/firebase.utils";
+import { signOutUser } from "../../utils/firebase/firebase.utils";
 import CartIcon from "../CartIcon/CartIcon";
-import CartDropdown from "../CartDropdown/CartDropdown";
-import { useSelector } from "react-redux";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/UserContext";
 
 const Navigation = () => {
-  const currentUser = useSelector(state => state.user.currentUser);
-  const hidden = useSelector(state => state.cart.hidden);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+  
+  const signOutHandler = async()=> {
+    await signOutUser()
+    setCurrentUser(null)
+  }
   return (
-    
     <>
       <div className="navigation">
-      <Link className="logo-container" to="/">
-        <img src={Logo} alt="Logo" />
-      </Link>
-      <div className="nav-links">
-        <Link className="nav-link" to="shop">
-          Shop
+        <Link className="logo-container" to="/">
+          <img src={Logo} alt="Logo" />
         </Link>
-        <Link className="nav-link" to="contact">
-          Contact
-        </Link>
-        {currentUser ? (
-          <div className="nav-link" onClick={() => auth.signOut()}>
-            Sign Out
-          </div>
-        ) : (
-          <Link className="nav-link" to="signin">
-            Sign in
+        <div className="nav-links">
+          <Link className="nav-link" to="shop">
+            Shop
           </Link>
-        )}
-        <CartIcon />
+          <Link className="nav-link" to="contact">
+            Contact
+          </Link>
+          {currentUser ? (
+            <div className="nav-link" onClick={signOutHandler}>
+              Sign Out
+            </div>
+          ) : (
+            <Link className="nav-link" to="auth">
+              Sign in
+            </Link>
+          )}
+          <CartIcon />
+        </div>
       </div>
-      {hidden ? "" : <CartDropdown />}
-    </div>
-    <Outlet />
+      <Outlet />
     </>
   );
 };
