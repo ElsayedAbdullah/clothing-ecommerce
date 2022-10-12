@@ -1,5 +1,5 @@
 import React from "react";
-import Directory from "../../components/Directory/Directory";
+import Categories from "../../components/Categories/Categories";
 
 import "./Homepage.scss"
 
@@ -7,7 +7,7 @@ const Homepage = () => {
   
   return (
     <div className="homepage">
-      <Directory />
+      <Categories />
     </div>
   );
 };
