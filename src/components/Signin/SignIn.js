@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { signInWithGooglePopup, createUserDocumentFromAuth, signInAuthWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
-import CustomButton from "../CustomButton/CustomButton";
+import { signInWithGooglePopup, signInAuthWithEmailAndPassword } from "../../utils/firebase/firebase.utils";
+import CustomButton, {BUTTON_TYPES_CLASSES} from "../CustomButton/CustomButton";
 import FormInput from "../FormInput/FormInput";
 
 import "./SignIn.scss";
@@ -54,7 +54,7 @@ const SignIn = () => {
         <FormInput type="password" name="password" value={password} onChange={handleChange} label="Password" required />
         <div className="buttons">
           <CustomButton type="submit">Sing in</CustomButton>
-          <CustomButton type='button' buttonType="google" onClick={signInWithGoogle}>
+          <CustomButton type='button' buttonType={BUTTON_TYPES_CLASSES.google} onClick={signInWithGoogle}>
             Sing in with google
           </CustomButton>
         </div>
